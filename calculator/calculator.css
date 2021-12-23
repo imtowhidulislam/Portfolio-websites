@@ -1,0 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(
+      to right,
+      rgba(104, 104, 101, 0.4),
+      rgba(62, 62, 65, 0.5)
+    ),
+    url(http://unsplash.it/1980/1000?image=161) center top;
+  padding: 5%;
+}
+.margin_area {
+  /* position: absolute; */
+  display: grid;
+  grid-auto-flow: row;
+  border: 4px solid rgb(218, 218, 214);
+  max-width: 50rem;
+  /* background-color: rgb(174, 187, 187); */
+  /* padding: 1em; */
+  border-radius: 0.75em;
+}
+.inputarea {
+  display: block;
+  width: 100%;
+  font-size: 4rem;
+  background-color: rgb(107, 96, 96);
+  border: none;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  padding: 0.25em 0.5em;
+}
+.btn-container {
+  color: orange;
+  display: flex;
+  flex-wrap: wrap;
+}
+.btn {
+  width: 25%;
+  font-size: clamp(1rem, 5vw, 2.5rem);
+  border: none;
+  cursor: pointer;
+  padding: 1rem 0rem;
+}
+.btn_operator {
+  color: rgb(0, 0, 0);
+  background-color: rgb(236, 217, 41);
+  transition: all 250ms ease-in;
+}
+.btn_operator:hover {
+  background: rgb(236, 236, 47);
+}
+.btn_digits {
+  background: rgb(14, 223, 76);
+  background-image: linear-gradient(45deg, rgb(226, 91, 1), rgb(29, 2, 128));
+  background-size: 500%;
+  background-position: left;
+  color: black;
+  transition: all 250ms ease-in;
+}
+.btn_digits:hover {
+  color: silver;
+  background-position: right;
+}
+.title {
+  margin-bottom: 1em;
+  border-bottom: 1px solid #000;
+  width: max-content;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 2rem;
+  background-image: linear-gradient(45deg, rgb(199, 7, 7), rgb(25, 25, 158));
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+.main_calculator {
+  display: grid;
+  place-items: center;
+}
+.btn_equal,
+.btn_clear {
+  width: 25%;
+  /* font-size: 3rem; */
+  font-size: clamp(1rem, 5vw, 2.5rem);
+  border: none;
+  cursor: pointer;
+  background-image: linear-gradient(45deg, rgb(197, 9, 50), rgb(4, 124, 98));
+  /* background-size: 500%; */
+  background-position: left;
+  color: black;
+  transition: background-position color 0.25s ease-in;
+}
+.btn_clear {
+  width: 100%;
+  border-end-start-radius: 0.5rem;
+  border-end-end-radius: 0.5rem;
+  padding: 1rem 0rem;
+  /* border-top-left-radius: 0.2em; */
+  /* border-top-right-radius: 0.2em; */
+}
