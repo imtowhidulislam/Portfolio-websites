@@ -3,8 +3,6 @@
 // ! HTML ELEMENTS
 const mobileNavigation = document.querySelector(".mobile_navigation");
 const primaryNavigation = document.querySelector(".primary_navigation");
-const leftBtn = document.querySelector(".left-btn");
-const righttBtn = document.querySelector(".right-btn");
 const mainreviewContainer = document.querySelector(".review_main_container");
 const reviewContainer = document.querySelector(".review_container");
 const section1 = document.querySelector(".section1");
@@ -38,12 +36,12 @@ mobileNavigation.addEventListener("click", (e) => {
 
 /* TODO: REVIEW IMPLEMENTATION */
 
-leftBtn.addEventListener("click", (e) => {
-  console.log("Button Left");
-});
-righttBtn.addEventListener("click", (e) => {
-  console.log("Button Right");
-});
+// leftBtn.addEventListener("click", (e) => {
+//   console.log("Button Left");
+// });
+// righttBtn.addEventListener("click", (e) => {
+//   console.log("Button Right");
+// });
 
 /* TODO:: fixed navigation  */
 const navHeight = navBar.getBoundingClientRect().height;
@@ -134,3 +132,102 @@ imageContainer.forEach((image) => {
   image.classList.add("blur");
   return image_observer.observe(image);
 });
+
+/* !! Slider Function */
+/* All HTML elements */
+const leftBtn = document.querySelector(".btn__1");
+const rightBtn = document.querySelector(".btn__2");
+const slide = document.querySelectorAll(".slide__img");
+const slider = document.querySelector(".slider");
+const dots = document.querySelector(".dots");
+
+slide.forEach((slide, i) => {
+  slide.style.transform = `translateX(${100 * i}%)`;
+});
+
+/* const animation = (slideNo) => {
+  return slide.forEach((slide, i) => {
+    return (slide.style.transform = `translateX(${100 * (i - slideNo)}%)`);
+  });
+};
+animation(0); */
+console.log(dots);
+const createDots = () => {
+  console.log(slide);
+  slide.forEach((_, i) => {
+    const dot = dots.insertAdjacentHTML(
+      "beforeend",
+      `<button class="dots__dot" data-slide="${i}"></button>`
+    );
+    return dot;
+  });
+};
+createDots();
+const dot = document.querySelectorAll(".dots__dot");
+console.log(dot);
+
+const removeActive = (arr) => {
+  dot.forEach((erase) => erase.classList.remove("dots__dot--active"));
+
+  document
+    .querySelector(`.dots__dot[data-slide="${arr}"]`)
+    .classList.add("dots__dot--active");
+};
+removeActive(0);
+const gotoSlide = (slides) => {
+  slide.forEach((s, i) => {
+    const setTransform = (s.style.transform = `translateX(${
+      100 * (i - slides)
+    }%)`);
+    return setTransform;
+  });
+};
+let initCount = 0;
+const lengthOfSlide = slide.length;
+const RightButton = () => {
+  //   this.preventDefault();
+  if (initCount >= lengthOfSlide - 1) {
+    initCount = 0;
+  } else initCount++;
+  gotoSlide(initCount);
+  removeActive(initCount);
+};
+const leftButton = () => {
+  if (initCount <= 0) {
+    initCount = lengthOfSlide - 1;
+  } else initCount--;
+  gotoSlide(initCount);
+  removeActive(initCount);
+};
+rightBtn.addEventListener("click", RightButton);
+
+leftBtn.addEventListener("click", leftButton);
+
+/* dot function */
+const dotFunc = (dot) => {
+  dot.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const Link = e.target.dataset.slide;
+      console.log(Link);
+      gotoSlide(Link);
+      removeActive(Link);
+    });
+  });
+};
+dotFunc(dot);
+/* key func */
+const KeyFunc = () => {
+  document.addEventListener("keydown", (e) => {
+    const leftKey = e.key === "ArrowLeft";
+    const rightKey = e.key === "ArrowRight";
+    console.log(e);
+    // !left key ...........
+    if (leftKey) {
+      leftButton();
+    } else if (rightKey) {
+      RightButton();
+    } else return;
+  });
+};
+KeyFunc();
