@@ -10,14 +10,19 @@ const navBar = document.querySelector(".area-nav");
 const navItem = document.querySelector(".primary_navigation");
 const navLink = document.querySelectorAll(".nav_link");
 const navHeader = document.querySelector(".header-nav1");
-/* all section */
 
+/* All HTML elements */
+const leftBtn = document.querySelector(".btn__1");
+const rightBtn = document.querySelector(".btn__2");
+const slide = document.querySelectorAll(".slide__img");
+const slider = document.querySelector(".slider");
+const dots = document.querySelector(".dots");
+
+/* all section */
 const section = document.querySelectorAll(".section");
 const header = document.querySelector(".header");
 console.log(header);
 // const height = header.getBoundingClientRect();
-console.log(reviewContainer);
-console.log(mainreviewContainer);
 
 mobileNavigation.addEventListener("click", (e) => {
   e.preventDefault();
@@ -45,6 +50,7 @@ mobileNavigation.addEventListener("click", (e) => {
 
 /* TODO:: fixed navigation  */
 const navHeight = navBar.getBoundingClientRect().height;
+console.log(navHeight);
 const touchHeader = function (entries) {
   const [entry] = entries;
   // console.log(entry);
@@ -61,6 +67,20 @@ const headerObserver = new IntersectionObserver(touchHeader, {
 
 headerObserver.observe(section1);
 
+/* TODO: Smooth Scrolling */
+navLink.forEach((link) => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    const nav = e.target.closest(".area-nav");
+    console.log(nav.getBoundingClientRect().height);
+    console.log(nav);
+    const sec = e.target.dataset.section;
+    const specificSection = document.querySelector(`#section--${sec}`);
+    console.log(specificSection);
+
+    specificSection.scrollIntoView({ behavior: "smooth" });
+  });
+});
 /* TODO:: Revealing the section */
 const secRevealing = () => {
   const optionsObserver = (entries, observer) => {
@@ -112,7 +132,7 @@ navBar.addEventListener("mouseout", puthover.bind(1));
 const imageContainer = document.querySelectorAll("img[data-src]");
 const imageObserver = function (entries, observer) {
   const [entry] = entries;
-  console.log(entry);
+  // console.log(entry);
   if (!entry.isIntersecting) return;
   let actualImage = entry.target.src;
   let alternativeImage = entry.target.dataset.src;
@@ -134,12 +154,6 @@ imageContainer.forEach((image) => {
 });
 
 /* !! Slider Function */
-/* All HTML elements */
-const leftBtn = document.querySelector(".btn__1");
-const rightBtn = document.querySelector(".btn__2");
-const slide = document.querySelectorAll(".slide__img");
-const slider = document.querySelector(".slider");
-const dots = document.querySelector(".dots");
 
 slide.forEach((slide, i) => {
   slide.style.transform = `translateX(${100 * i}%)`;
@@ -151,9 +165,9 @@ slide.forEach((slide, i) => {
   });
 };
 animation(0); */
-console.log(dots);
+// console.log(dots);
 const createDots = () => {
-  console.log(slide);
+  // console.log(slide);
   slide.forEach((_, i) => {
     const dot = dots.insertAdjacentHTML(
       "beforeend",
@@ -164,7 +178,7 @@ const createDots = () => {
 };
 createDots();
 const dot = document.querySelectorAll(".dots__dot");
-console.log(dot);
+// console.log(dot);
 
 const removeActive = (arr) => {
   dot.forEach((erase) => erase.classList.remove("dots__dot--active"));
