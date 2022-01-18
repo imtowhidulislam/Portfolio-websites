@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  /* background-image: url("http://unsplash.it/1920/1080?image=538"); */
+  font-size: 1.4rem;
+  font-family: poppins;
+  background-size: cover;
+  height: 100vh;
+  background-repeat: no-repeat;
+  /* width: 100%; */
+
+  /* To prevent any x axis overflow issue */
+  overflow-x: hidden;
+}
+.flex {
+  display: flex;
+  gap: 2rem;
+}
+.mobile-nav-loggle {
+  display: none;
+}
+.primary-navigation a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.primary-navigation a > [aria-hidden="true"] {
+  font-weight: 700;
+  margin-inline-end: 0.75rem;
+}
+.primary-navigation {
+  display: flex;
+  align-items: center;
+  background-color: hsl(0 0% 0% / 0.4);
+}
+/* it will help to keep the property for browser which supports this effect
+if it doesn't support it will the use the default one */
+@supports (backdrop-filter: blur(1rem)) {
+  .primary-navigation {
+    background-color: hsl(0 0% 100% / 0.1);
+    backdrop-filter: blur(1em);
+    padding-block: 2rem;
+    padding-inline: 2rem;
+  }
+}
+.primary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 9999;
+}
+.logo {
+  margin: 2rem;
+  width: 70px;
+  height: 70px;
+}
+.primary-navigation {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* Media Query for the small sizes */
+@media (max-width: 35rem) {
+  .primary-navigation {
+    position: fixed;
+    inset: 0 0 0 30%;
+    flex-direction: column;
+    padding: min(30vh, 10rem) 2rem;
+    align-items: start;
+    transform: translateX(100%);
+    z-index: 9999;
+    transition: transform 350ms ease-in-out;
+  }
+  .primary-navigation[data-visible="true"] {
+    transform: translateX(0%);
+  }
+  .mobile-nav-loggle {
+    display: block;
+    position: absolute;
+    background-color: tranparent;
+    z-index: 9999;
+    border: none;
+    width: 2rem;
+    aspect-ratio: 1;
+    top: 3rem;
+    right: 2rem;
+    background: url(./bars-solid.svg);
+    background-repeat: no-repeat;
+  }
+  .cross {
+    background: url(./times-solid.svg);
+    background-repeat: no-repeat;
+    z-index: 10000;
+  }
+  .logo {
+    display: none;
+  }
+}
+@media (min-width: 35rem) and (max-width: 55rem) {
+  .primary-navigation a > [aria-hidden="true"] {
+    display: none;
+  }
+}
+
+@media (min-width: 35rem) {
+  .primary-navigation {
+    padding-block: 2rem;
+    padding-inline: clamp(3rem, 7vw, 6rem);
+  }
+}
+/* ** stick navigation */
+.sticky__primary-header {
+  position: fixed;
+  background-color: #fff;
+  width: 100%;
+  top: 0;
+}
